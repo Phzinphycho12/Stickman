@@ -1,4 +1,3 @@
-
 #if newgrounds
 package;
 
