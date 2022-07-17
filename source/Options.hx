@@ -96,27 +96,24 @@ class DFJKOption extends Option
 	}
 }
 
-class CpuStrums extends Option
+class AndroidControls extends Option
 {
-	public function new(desc:String)
+	public function new()
 	{
 		super();
-		description = desc;
 	}
 
 	public override function press():Bool
 	{
-		FlxG.save.data.cpuStrums = !FlxG.save.data.cpuStrums;
-		
-		display = updateDisplay();
-		return true;
+		trace("switch");
+		FlxG.switchState(new android.AndroidControlsMenu());
+		return false;
 	}
 
 	private override function updateDisplay():String
 	{
-		return  FlxG.save.data.cpuStrums ? "Light CPU Strums" : "CPU Strums stay static";
+		return "Android Controls";
 	}
-
 }
 
 class DownscrollOption extends Option
