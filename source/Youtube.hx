@@ -18,7 +18,6 @@ class Youtube extends MusicBeatSubstate
     var click:FlxSprite;
     var videogroup:FlxTypedGroup<FlxSprite>;
     var curSelected:Int = 0;
-    var video:MP4Handler = new MP4Handler();
     var isCutscene:Bool = false;
     var disy:FlxSprite;
     var bal:FlxSprite;
