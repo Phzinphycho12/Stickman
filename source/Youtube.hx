@@ -199,7 +199,6 @@ class Youtube extends MusicBeatSubstate
                         PlayState.stickthingidk = true;
                         remove(click);
                         trace(PlayState.isStoryMode);
-                        video.playMP4(Paths.video('intro'), new PlayState()); 
                         
                     });
             }
