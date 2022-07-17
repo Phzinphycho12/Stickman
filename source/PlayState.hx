@@ -241,8 +241,6 @@ class PlayState extends MusicBeatState
 	public function addObject(object:FlxBasic) { add(object); }
 	public function removeObject(object:FlxBasic) { remove(object); }
 
-	//Video
-	var video:MP4Handler = new MP4Handler();
 
 	//Disy Room Bitch
 	var room:FlxSprite;
@@ -1265,7 +1263,9 @@ class PlayState extends MusicBeatState
 		kadeEngineWatermark.cameras = [camHUD];
 		if (loadRep)
 			replayTxt.cameras = [camHUD];
-
+                #if android
+		addAndroidControls();
+	        #end
 		// if (SONG.song == 'South')
 		// FlxG.camera.alpha = 0.7;
 		// UI_camera.zoom = 1;
@@ -3042,9 +3042,10 @@ class PlayState extends MusicBeatState
 						StoryMenuState.weekUnlocked[Std.int(Math.min(storyWeek + 1, StoryMenuState.weekUnlocked.length - 1))] = true;
 	
 						if (SONG.validScore)
-						{
+						{       #if newgrounds
 							NGio.unlockMedal(60961);
 							Highscore.saveWeekScore(storyWeek, campaignScore, storyDifficulty);
+							#end
 						}
 	
 						FlxG.save.data.weekUnlocked = StoryMenuState.weekUnlocked;
@@ -3460,12 +3461,6 @@ class PlayState extends MusicBeatState
 					releaseArray = [false, false, false, false];
 				} 
 
-				var anas:Array<Ana> = [null,null,null,null];
-
-				for (i in 0...pressArray.length)
-					if (pressArray[i])
-						anas[i] = new Ana(Conductor.songPosition, null, false, "miss", i);
-
 				// HOLDS, check for sustain notes
 				if (holdArray.contains(true) && /*!boyfriend.stunned && */ generatedMusic)
 				{
@@ -3476,8 +3471,6 @@ class PlayState extends MusicBeatState
 					});
 				}
 		 
-				if (KeyBinds.gamepad && !FlxG.keys.justPressed.ANY)
-				{
 					// PRESSES, check for note hits
 					if (pressArray.contains(true) && generatedMusic)
 					{
@@ -3548,9 +3541,7 @@ class PlayState extends MusicBeatState
 										mashViolations--;
 									scoreTxt.color = FlxColor.WHITE;
 									var noteDiff:Float = -(coolNote.strumTime - Conductor.songPosition);
-									anas[coolNote.noteData].hit = true;
-									anas[coolNote.noteData].hitJudge = Ratings.CalculateRating(noteDiff, Math.floor((PlayStateChangeables.safeFrames / 60) * 1000));
-									anas[coolNote.noteData].nearestNote = [coolNote.strumTime,coolNote.noteData,coolNote.sustainLength];
+
 									goodNoteHit(coolNote);
 								}
 							}
@@ -3563,11 +3554,6 @@ class PlayState extends MusicBeatState
 							}
 					}
 
-					if (!loadRep)
-						for (i in anas)
-							if (i != null)
-								replayAna.anaArray.push(i); // put em all there
-				}
 				notes.forEachAlive(function(daNote:Note)
 				{
 					if(PlayStateChangeables.useDownscroll && daNote.y > strumLine.y ||
@@ -3673,7 +3659,7 @@ class PlayState extends MusicBeatState
 
 			public function backgroundVideo(source:String) // for background videos
 				{
-					#if cpp
+					/*#if cpp
 					useVideo = true;
 			
 					FlxG.stage.window.onFocusOut.add(focusOut);
@@ -3724,7 +3710,7 @@ class PlayState extends MusicBeatState
 						webmHandler.pause();
 					else
 						webmHandler.resume();
-					#end
+					#end*/
 				}
 
 	function noteMiss(direction:Int = 1, daNote:Note):Void
