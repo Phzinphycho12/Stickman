@@ -7,9 +7,7 @@ import openfl.ui.Keyboard;
 import openfl.events.KeyboardEvent;
 import Replay.Ana;
 import Replay.Analysis;
-#if cpp
-import webm.WebmPlayer;
-#end
+
 import flixel.input.keyboard.FlxKey;
 import haxe.Exception;
 import openfl.geom.Matrix;
@@ -1263,7 +1261,7 @@ class PlayState extends MusicBeatState
 		kadeEngineWatermark.cameras = [camHUD];
 		if (loadRep)
 			replayTxt.cameras = [camHUD];
-                #if android
+         #if android
 		addAndroidControls();
 	        #end
 		// if (SONG.song == 'South')
@@ -1431,8 +1429,8 @@ class PlayState extends MusicBeatState
 	function startCountdown():Void
 	{
 		#if android
-	        androidc.visible = true;
-	        #end
+	    androidc.visible = true;
+	    #end
 	        
 		inCutscene = false;
 
@@ -3015,7 +3013,6 @@ class PlayState extends MusicBeatState
 								paused = true;
 								FlxG.sound.music.stop();
 								vocals.stop();
-								video.playMP4(Paths.video('cre'), new MainMenuState()); 
 							case 'wrath-soul':
 								transIn = FlxTransitionableState.defaultTransIn;
 								transOut = FlxTransitionableState.defaultTransOut;
@@ -3024,7 +3021,6 @@ class PlayState extends MusicBeatState
 								paused = true;
 								FlxG.sound.music.stop();
 								vocals.stop();
-								video.playMP4(Paths.video('disy'), new MainMenuState()); 
 
 						}
 
@@ -3093,8 +3089,7 @@ class PlayState extends MusicBeatState
 								
 							case "fight":
 								inCutscene = true;
-								paused = true;
-								video.playMP4(Paths.video('song3'), new PlayState()); 
+								paused = true;  
                        	 	default:
                            		LoadingState.loadAndSwitchState(new PlayState());
                      	}
