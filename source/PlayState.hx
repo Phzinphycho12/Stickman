@@ -3015,16 +3015,16 @@ class PlayState extends MusicBeatState
 							case 'serious':
 								transIn = FlxTransitionableState.defaultTransIn;
 								transOut = FlxTransitionableState.defaultTransOut;
-								inCutscene = true;
-								paused = true;
+								inCutscene = false;
+								paused = false;
 								FlxG.sound.music.stop();
 								vocals.stop();
 							case 'wrath-soul':
 								transIn = FlxTransitionableState.defaultTransIn;
 								transOut = FlxTransitionableState.defaultTransOut;
-								inCutscene = true;
+								inCutscene = false;
 								FlxG.save.data.disy = true;
-								paused = true;
+								paused = false;
 								FlxG.sound.music.stop();
 								vocals.stop();
 
@@ -3088,13 +3088,13 @@ class PlayState extends MusicBeatState
 						switch(SONG.song.toLowerCase())
                     	{
 					    	case "sticking":
-							   inCutscene = true;
+							   inCutscene = false;
 							   PlayState.isStoryMode = true;
-							   paused = true;
+							   paused = false;
 								
 							case "fight":
-								inCutscene = true;
-								paused = true;  
+								inCutscene = false;
+								paused = false;  
                        	 	default:
                            		LoadingState.loadAndSwitchState(new PlayState());
                      	}
